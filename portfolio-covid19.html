@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>COVID-19 Detection Using Deep Learning | Teddy Boamah Portfolio</title>
+  <meta name="description" content="Portfolio project by Teddy Boamah showcasing 
+    a deep learning-based COVID-19 detection system using CNN, TensorFlow, Keras, 
+    and PyQt5 for chest X-ray image classification.">
+  <meta name="keywords" content="COVID-19 Detection, Deep Learning, CNN, TensorFlow, 
+    Keras, PyQt5, Medical Imaging, Chest X-ray Classification, Artificial Intelligence, 
+    Machine Learning, Teddy Boamah Portfolio">
+  <!-- Open Graph (for sharing) -->
+  <meta property="og:title" content="Teddy Boamah - AI Developer">
+  <meta property="og:description" content="AI Developer and Entrepreneur building intelligent systems">
+  <meta property="og:image" content="assets/images/Teddy.webp">
+  <meta property="og:type" content="website">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+
+</head>
+
+<body class="portfolio-details-page">
+
+  <header id="header" class="header d-flex align-items-center position-relative">
+    <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.webp" alt=""> -->
+        <h1 class="sitename">Teddy Boamah</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#resume">Resume</a></li>
+          <li><a href="index.html#portfolio">Portfolio</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title">
+      <div class="breadcrumbs">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html#hero"><i class="bi bi-house"></i> Home</a></li>
+            <li class="breadcrumb-item"><a href="index.html#portfolio">Portfolio</a></li>
+            <li class="breadcrumb-item active current">COVID-19 Detection Using Deep Learning</li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="title-wrapper">
+        <h1>COVID-19 Detection Using Deep Learning</h1>
+        <p>A deep learning-based medical imaging project designed to classify chest X-ray scans for COVID-19 detection 
+            using Convolutional Neural Networks (CNN), TensorFlow, Keras, and an interactive PyQt5 interface.
+        </p>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="project-hero">
+          <div class="hero-content" data-aos="fade-up">
+            <div class="project-category">Deep Learning • Medical Imaging • Computer Vision</div>
+            <h1 class="project-title">COVID-19 Detection Using Deep Learning</h1>
+            <p class="project-subtitle">
+                A deep learning-powered diagnostic support system designed to classify 
+                chest X-ray images for COVID-19 detection using Convolutional Neural Networks (CNN). 
+                Built with TensorFlow, Keras, and PyQt5 to provide real-time prediction 
+                through an interactive graphical interface.
+            </p>
+          </div>
+
+          <div class="project-meta-grid" data-aos="fade-up" data-aos-delay="200">
+            <div class="meta-column">
+              <div class="meta-label">Client</div>
+              <div class="meta-value">Pantech ProEd Pvt Ltd</div>
+            </div>
+            <div class="meta-column">
+              <div class="meta-label">Timeline</div>
+              <div class="meta-value">2 Months</div>
+            </div>
+            <div class="meta-column">
+              <div class="meta-label">Year</div>
+              <div class="meta-value">2025</div>
+            </div>
+            <div class="meta-column">
+              <div class="meta-label">Services</div>
+              <div class="meta-value">Deep Learning, Medical Imaging, GUI Development</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="visual-showcase" data-aos="zoom-in" data-aos-delay="100">
+          <div class="main-visual">
+            <div class="portfolio-details-slider swiper init-swiper">
+              <script type="application/json" class="swiper-config">
+                {
+                  "loop": true,
+                  "speed": 600,
+                  "autoplay": {
+                    "delay": 4000
+                  },
+                  "effect": "creative",
+                  "creativeEffect": {
+                    "prev": {
+                      "shadow": false,
+                      "translate": ["-120%", 0, -500]
+                    },
+                    "next": {
+                      "shadow": false,
+                      "translate": ["120%", 0, -500]
+                    }
+                  },
+                  "slidesPerView": 1,
+                  "navigation": {
+                    "nextEl": ".swiper-button-next",
+                    "prevEl": ".swiper-button-prev"
+                  }
+                }
+              </script>
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <img src="assets/img/portfolio/covid_file1.webp" alt="COVID-19 detector" class="img-fluid" loading="lazy">
+                </div>
+                <div class="swiper-slide">
+                  <img src="assets/img/portfolio/covid_2.webp" alt="COVID-19 detector" class="img-fluid" loading="lazy">
+                </div>
+                <div class="swiper-slide">
+                  <img src="assets/img/portfolio/covid_3.webp" alt="COVID-19 detector" class="img-fluid" loading="lazy">
+                </div>
+              </div>
+              <div class="swiper-button-next"></div>
+              <div class="swiper-button-prev"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-section">
+          <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+              <div class="project-overview" data-aos="fade-up">
+                <h2>Project Overview</h2>
+                <p class="overview-text">This project focused on developing an AI-powered COVID-19 detection system capable of 
+                    analyzing chest X-ray images using Convolutional Neural Networks (CNN). The objective was to assist in 
+                    rapid medical image classification by providing a predictive model that identifies possible COVID-19 infections 
+                    from radiographic scans. Built using TensorFlow and Keras, the system was integrated with a PyQt5 graphical interface 
+                    to allow users to upload X-ray images and receive real-time prediction results through an accessible desktop application.
+                </p>
+
+                <div class="challenge-solution">
+                  <div class="challenge-block" data-aos="fade-up" data-aos-delay="100">
+                    <h3>The Challenge</h3>
+                    <p>Detecting COVID-19 from chest X-ray images presents several challenges, including limited labeled medical datasets, 
+                        image quality variations, and the need for accurate classification in a healthcare context. The project required 
+                        building a reliable deep learning model capable of distinguishing COVID-19 patterns from normal or pneumonia-related 
+                        lung scans while minimizing false predictions. Another challenge involved creating a user-friendly interface that allows 
+                        non-technical users to interact with the system and obtain predictions efficiently.
+                    </p>
+                  </div>
+
+                  <div class="solution-block" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Our Approach</h3>
+                    <p>A Convolutional Neural Network (CNN) architecture was developed using TensorFlow and Keras to learn patterns from 
+                        chest X-ray images. The dataset was preprocessed through resizing, normalization, and augmentation techniques to 
+                        improve model generalization and performance. After training and validation, the model was integrated into a 
+                        PyQt5 desktop interface, enabling users to upload X-ray scans and receive real-time predictions. This approach 
+                        combined deep learning accuracy with accessibility, creating a practical diagnostic support tool.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics-showcase" data-aos="fade-up" data-aos-delay="100">
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <div class="metrics-content">
+                <h3>Impact &amp; Results</h3>
+                <p>The project demonstrated the practical application of deep learning in 
+                    medical image classification by achieving reliable prediction performance on 
+                    chest X-ray datasets. It strengthened skills in model training, evaluation, 
+                    and deployment while showcasing how AI can support faster diagnostic workflows. 
+                    The addition of a PyQt5 interface transformed the model from a research experiment 
+                    into an accessible desktop application for real-time COVID-19 detection.
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="metrics-grid">
+                <div class="metric-item" data-aos="fade-up" data-aos-delay="200">
+                  <div class="metric-number">92%</div>
+                  <div class="metric-label">Model Accuracy Achieved</div>
+                </div>
+                <div class="metric-item" data-aos="fade-up" data-aos-delay="250">
+                  <div class="metric-number">CNN</div>
+                  <div class="metric-label">Deep Learning Architecture Used</div>
+                </div>
+                <div class="metric-item" data-aos="fade-up" data-aos-delay="300">
+                  <div class="metric-number">Real-Time</div>
+                  <div class="metric-label">Prediction Through GUI Interface</div>
+                </div>
+                <div class="metric-item" data-aos="fade-up" data-aos-delay="350">
+                  <div class="metric-number">PyQt5</div>
+                  <div class="metric-label">Desktop Application Integration</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="technology-stack" data-aos="fade-up" data-aos-delay="100">
+          <div class="row">
+            <div class="col-lg-3">
+              <h3>Technology Stack</h3>
+            </div>
+            <div class="col-lg-9">
+              <div class="tech-categories">
+                <div class="tech-category" data-aos="fade-up" data-aos-delay="150">
+                  <div class="category-title">Programming & Frameworks</div>
+                  <div class="tech-list">
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">TensorFlow</span>
+                    <span class="tech-item">Keras</span>
+                  </div>
+                </div>
+                <div class="tech-category" data-aos="fade-up" data-aos-delay="200">
+                  <div class="category-title">Data Processing</div>
+                  <div class="tech-list">
+                    <span class="tech-item">NumPy</span>
+                    <span class="tech-item">Pandas</span>
+                    <span class="tech-item">Image Preprocessing</span>
+                  </div>
+                </div>
+                <div class="tech-category" data-aos="fade-up" data-aos-delay="250">
+                  <div class="category-title">Visualization & Interface</div>
+                  <div class="tech-list">
+                    <span class="tech-item">PyQt5</span>
+                    <span class="tech-item">Matplotlib</span>
+                    <span class="tech-item">OpenCV</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="process-gallery" data-aos="fade-up" data-aos-delay="100">
+          <h3>Design Process</h3>
+          <div class="gallery-masonry">
+            <div class="gallery-item large" data-aos="fade-up" data-aos-delay="150">
+              <img src="assets/img/portfolio/portfolio-11.webp" alt="Design process" class="img-fluid glightbox" loading="lazy">
+              <div class="gallery-caption">User Research &amp; Personas</div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+              <img src="assets/img/portfolio/portfolio-12.webp" alt="Design process" class="img-fluid glightbox" loading="lazy">
+              <div class="gallery-caption">Wireframes</div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="250">
+              <img src="assets/img/portfolio/portfolio-3.webp" alt="Design process" class="img-fluid glightbox" loading="lazy">
+              <div class="gallery-caption">Prototypes</div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+              <img src="assets/img/portfolio/portfolio-4.webp" alt="Design process" class="img-fluid glightbox" loading="lazy">
+              <div class="gallery-caption">Final Design</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="key-features-section" data-aos="fade-up" data-aos-delay="100">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="features-intro">
+                <h3>Key Features</h3>
+                <p>Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="features-list">
+                <div class="feature-row" data-aos="fade-up" data-aos-delay="150">
+                  <div class="feature-icon">
+                    <i class="bi bi-search"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h4>Advanced Search Filters</h4>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                  </div>
+                </div>
+                <div class="feature-row" data-aos="fade-up" data-aos-delay="200">
+                  <div class="feature-icon">
+                    <i class="bi bi-heart"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h4>Sustainability Scoring</h4>
+                    <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim.</p>
+                  </div>
+                </div>
+                <div class="feature-row" data-aos="fade-up" data-aos-delay="250">
+                  <div class="feature-icon">
+                    <i class="bi bi-people"></i>
+                  </div>
+                  <div class="feature-content">
+                    <h4>Community Reviews</h4>
+                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-footer" data-aos="fade-up" data-aos-delay="200">
+          <div class="footer-navigation">
+            <a href="#" class="nav-link prev-project">
+              <span class="nav-direction">Previous</span>
+              <span class="nav-title">Digital Banking App</span>
+            </a>
+            <a href="#" class="nav-link all-projects">
+              <i class="bi bi-grid-3x3-gap"></i>
+              <span>All Projects</span>
+            </a>
+            <a href="#" class="nav-link next-project">
+              <span class="nav-direction">Next</span>
+              <span class="nav-title">Healthcare Dashboard</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Details Section -->
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Teddy Boamah</strong> <span>All Rights Reserved</span></p>
+      </div>
+      <div class="social-links d-flex justify-content-center">
+        <a href=""><i class="bi bi-twitter-x"></i></a>
+        <a href=""><i class="bi bi-facebook"></i></a>
+        <a href=""><i class="bi bi-instagram"></i></a>
+        <a href=""><i class="bi bi-linkedin"></i></a>
+      </div>
+     
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
