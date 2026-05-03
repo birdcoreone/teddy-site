@@ -1,0 +1,253 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans, sans-serif); background: transparent; }
+.dash { padding: 20px; }
+
+.top-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.top-bar-left { display: flex; align-items: center; gap: 10px; }
+.pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #1D9E75; }
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+  .pulse-dot { animation: pulse 2s ease-in-out infinite; }
+}
+.top-label { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
+.top-sub { font-size: 11px; color: var(--color-text-secondary); }
+.badge-live { font-size: 11px; background: #E1F5EE; color: #085041; padding: 3px 9px; border-radius: 4px; font-weight: 500; }
+@media (prefers-color-scheme: dark) { .badge-live { background: #085041; color: #9FE1CB; } }
+
+.metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+.metric { background: var(--color-background-secondary); border-radius: 8px; padding: 10px 12px; }
+.metric-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 3px; }
+.metric-val { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+.metric-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
+.metric-val.green { color: #0F6E56; }
+.metric-val.blue { color: #185FA5; }
+.metric-val.amber { color: #854F0B; }
+.metric-val.purple { color: #534AB7; }
+@media (prefers-color-scheme: dark) {
+  .metric-val.green { color: #5DCAA5; }
+  .metric-val.blue { color: #85B7EB; }
+  .metric-val.amber { color: #EF9F27; }
+  .metric-val.purple { color: #AFA9EC; }
+}
+
+.arch-panel { border: 0.5px solid var(--color-border-tertiary); border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+.arch-header { background: var(--color-background-secondary); padding: 10px 14px; font-size: 12px; color: var(--color-text-secondary); display: flex; justify-content: space-between; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.arch-body { padding: 20px 14px 16px; overflow-x: auto; }
+
+.layer-flow { display: flex; align-items: center; gap: 0; min-width: 620px; }
+.layer-group { display: flex; align-items: center; gap: 0; }
+.layer-sep { width: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.arrow-svg { width: 10px; height: 10px; }
+
+.layer-block { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; }
+.layer-block:hover .layer-rect { opacity: 0.85; }
+.layer-rect { border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 500; writing-mode: initial; border: 0.5px solid transparent; transition: opacity 0.15s; }
+
+.lr-conv { background: #E6F1FB; color: #0C447C; border-color: #B5D4F4; width: 36px; }
+.lr-bn   { background: #EEEDFE; color: #3C3489; border-color: #CECBF6; width: 28px; }
+.lr-pool { background: #EAF3DE; color: #27500A; border-color: #C0DD97; width: 28px; }
+.lr-drop { background: #F1EFE8; color: #444441; border-color: #D3D1C7; width: 28px; }
+.lr-flat { background: #FAC775; color: #412402; border-color: #EF9F27; width: 32px; }
+.lr-dense{ background: #FAEEDA; color: #633806; border-color: #FAC775; width: 44px; }
+.lr-out  { background: #E1F5EE; color: #085041; border-color: #9FE1CB; width: 44px; }
+.lr-relu { background: #FAECE7; color: #712B13; border-color: #F5C4B3; width: 28px; }
+.lr-inp  { background: #F1EFE8; color: #2C2C2A; border-color: #D3D1C7; width: 44px; }
+
+@media (prefers-color-scheme: dark) {
+  .lr-conv { background: #042C53; color: #B5D4F4; border-color: #185FA5; }
+  .lr-bn   { background: #26215C; color: #CECBF6; border-color: #534AB7; }
+  .lr-pool { background: #173404; color: #C0DD97; border-color: #3B6D11; }
+  .lr-drop { background: #2C2C2A; color: #D3D1C7; border-color: #5F5E5A; }
+  .lr-flat { background: #412402; color: #FAC775; border-color: #854F0B; }
+  .lr-dense{ background: #412402; color: #FAEEDA; border-color: #BA7517; }
+  .lr-out  { background: #04342C; color: #9FE1CB; border-color: #0F6E56; }
+  .lr-relu { background: #4A1B0C; color: #F5C4B3; border-color: #993C1D; }
+  .lr-inp  { background: #2C2C2A; color: #D3D1C7; border-color: #5F5E5A; }
+}
+
+.layer-name { font-size: 9px; color: var(--color-text-secondary); text-align: center; max-width: 48px; line-height: 1.2; }
+.layer-dim  { font-size: 9px; color: var(--color-text-secondary); text-align: center; opacity: 0.7; }
+
+.selected-panel { background: var(--color-background-secondary); border-radius: 8px; padding: 12px 14px; margin: 12px 0 0; font-size: 12px; color: var(--color-text-secondary); min-height: 52px; }
+.sel-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 4px; }
+.sel-row { display: flex; gap: 16px; flex-wrap: wrap; }
+.sel-item { display: flex; flex-direction: column; gap: 2px; }
+.sel-k { font-size: 10px; color: var(--color-text-secondary); }
+.sel-v { font-size: 12px; font-weight: 500; color: var(--color-text-primary); }
+
+.bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.chart-panel { border: 0.5px solid var(--color-border-tertiary); border-radius: 10px; overflow: hidden; }
+.chart-head { background: var(--color-background-secondary); padding: 9px 13px; font-size: 12px; color: var(--color-text-secondary); border-bottom: 0.5px solid var(--color-border-tertiary); }
+.chart-body { padding: 14px 13px 10px; }
+
+.conf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-bottom: 8px; }
+.conf-cell { border-radius: 4px; padding: 8px 6px; text-align: center; }
+.conf-tp { background: #E1F5EE; }
+.conf-tn { background: #E1F5EE; }
+.conf-fp { background: #FCEBEB; }
+.conf-fn { background: #FCEBEB; }
+@media (prefers-color-scheme: dark) {
+  .conf-tp,.conf-tn { background: #04342C; }
+  .conf-fp,.conf-fn { background: #501313; }
+}
+.conf-val { font-size: 18px; font-weight: 500; }
+.conf-tp .conf-val,.conf-tn .conf-val { color: #0F6E56; }
+.conf-fp .conf-val,.conf-fn .conf-val { color: #A32D2D; }
+@media (prefers-color-scheme: dark) {
+  .conf-tp .conf-val,.conf-tn .conf-val { color: #5DCAA5; }
+  .conf-fp .conf-val,.conf-fn .conf-val { color: #F09595; }
+}
+.conf-lbl { font-size: 10px; color: var(--color-text-secondary); margin-top: 2px; }
+
+.bar-list { display: flex; flex-direction: column; gap: 7px; }
+.bar-item { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.bar-lbl { color: var(--color-text-secondary); width: 64px; flex-shrink: 0; }
+.bar-track { flex: 1; height: 6px; background: var(--color-background-secondary); border-radius: 3px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; }
+.bar-val { font-size: 12px; font-weight: 500; color: var(--color-text-primary); width: 36px; text-align: right; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--color-text-secondary); }
+.leg-dot { width: 8px; height: 8px; border-radius: 2px; }
+</style>
+
+<div class="dash">
+  <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">COVID-19 chest X-ray CNN architecture dashboard showing layer structure, metrics, and classification performance</h2>
+
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <div class="pulse-dot"></div>
+      <div>
+        <div class="top-label">COVID-19 X-ray classifier · ResNet-inspired CNN</div>
+        <div class="top-sub">Binary classification · chest radiograph · PyTorch</div>
+      </div>
+    </div>
+    <span class="badge-live">model ready</span>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><div class="metric-label">accuracy</div><div class="metric-val green">96.8%</div><div class="metric-sub">test set</div></div>
+    <div class="metric"><div class="metric-label">AUC-ROC</div><div class="metric-val blue">0.987</div><div class="metric-sub">binary</div></div>
+    <div class="metric"><div class="metric-label">parameters</div><div class="metric-val amber">2.1M</div><div class="metric-sub">trainable</div></div>
+    <div class="metric"><div class="metric-label">inference</div><div class="metric-val purple">18ms</div><div class="metric-sub">avg / image</div></div>
+  </div>
+
+  <div class="arch-panel">
+    <div class="arch-header">
+      <span>network architecture — click any layer to inspect</span>
+      <span id="layer-count">14 layers</span>
+    </div>
+    <div class="arch-body">
+      <div class="layer-flow" id="layerFlow"></div>
+      <div class="selected-panel" id="selPanel">
+        <div class="sel-name">Select a layer to see details</div>
+        <div style="color:var(--color-text-secondary);font-size:12px">Click any block above to inspect parameters, output shape, and activation</div>
+      </div>
+    </div>
+    <div class="legend" style="padding: 0 14px 12px;">
+      <div class="leg-item"><div class="leg-dot" style="background:#378ADD"></div>Conv2D</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#7F77DD"></div>BatchNorm</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#639922"></div>MaxPool</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#D85A30"></div>ReLU</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#888780"></div>Dropout</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#BA7517"></div>Dense</div>
+      <div class="leg-item"><div class="leg-dot" style="background:#1D9E75"></div>Output</div>
+    </div>
+  </div>
+
+  <div class="bottom-grid">
+    <div class="chart-panel">
+      <div class="chart-head">confusion matrix (test set, n=780)</div>
+      <div class="chart-body">
+        <div style="display:grid;grid-template-columns:20px 1fr;gap:4px;margin-bottom:4px">
+          <div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px;font-size:10px;color:var(--color-text-secondary);text-align:center">
+            <div>pred. COVID</div><div>pred. normal</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:20px 1fr;gap:4px">
+          <div style="display:flex;flex-direction:column;justify-content:space-around;font-size:10px;color:var(--color-text-secondary)">
+            <div style="writing-mode:vertical-rl;transform:rotate(180deg);text-align:center">act. COVID</div>
+            <div style="writing-mode:vertical-rl;transform:rotate(180deg);text-align:center">act. normal</div>
+          </div>
+          <div class="conf-grid">
+            <div class="conf-cell conf-tp"><div class="conf-val">314</div><div class="conf-lbl">TP</div></div>
+            <div class="conf-cell conf-fn"><div class="conf-val">11</div><div class="conf-lbl">FN</div></div>
+            <div class="conf-cell conf-fp"><div class="conf-val">14</div><div class="conf-lbl">FP</div></div>
+            <div class="conf-cell conf-tn"><div class="conf-val">441</div><div class="conf-lbl">TN</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-panel">
+      <div class="chart-head">per-class metrics</div>
+      <div class="chart-body">
+        <div class="bar-list">
+          <div class="bar-item"><span class="bar-lbl">sensitivity</span><div class="bar-track"><div class="bar-fill" style="width:96.6%;background:#1D9E75"></div></div><span class="bar-val">96.6%</span></div>
+          <div class="bar-item"><span class="bar-lbl">specificity</span><div class="bar-track"><div class="bar-fill" style="width:96.9%;background:#378ADD"></div></div><span class="bar-val">96.9%</span></div>
+          <div class="bar-item"><span class="bar-lbl">precision</span><div class="bar-track"><div class="bar-fill" style="width:95.7%;background:#7F77DD"></div></div><span class="bar-val">95.7%</span></div>
+          <div class="bar-item"><span class="bar-lbl">F1 score</span><div class="bar-track"><div class="bar-fill" style="width:96.1%;background:#D85A30"></div></div><span class="bar-val">96.1%</span></div>
+          <div class="bar-item"><span class="bar-lbl">AUC-ROC</span><div class="bar-track"><div class="bar-fill" style="width:98.7%;background:#BA7517"></div></div><span class="bar-val">0.987</span></div>
+        </div>
+        <div style="margin-top:12px;padding-top:10px;border-top:0.5px solid var(--color-border-tertiary)">
+          <button onclick="sendPrompt('Explain the tradeoff between sensitivity and specificity for COVID detection and how to tune the classification threshold ↗')" style="font-size:11px;padding:6px 10px;width:100%">Tune classification threshold ↗</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const layers = [
+  { id:'inp',  cls:'lr-inp',  label:'Input',    short:'224×224×3', name:'Input layer', params:'—', shape:'224×224×3', act:'—', detail:'RGB chest X-ray, resized to 224×224, normalized to [0,1]' },
+  { id:'c1',   cls:'lr-conv', label:'Conv', short:'32×3×3', name:'Conv2D — block 1', params:'896', shape:'222×222×32', act:'—', detail:'32 filters, 3×3 kernel, stride 1, valid padding' },
+  { id:'bn1',  cls:'lr-bn',   label:'BN',    short:'',      name:'BatchNorm — block 1', params:'128', shape:'222×222×32', act:'ReLU', detail:'Normalizes activations; ReLU applied after' },
+  { id:'r1',   cls:'lr-relu', label:'ReLU',  short:'',      name:'ReLU activation', params:'0', shape:'222×222×32', act:'ReLU', detail:'Element-wise max(0,x); kills negative activations' },
+  { id:'p1',   cls:'lr-pool', label:'Pool',  short:'2×2',   name:'MaxPool2D — block 1', params:'0', shape:'111×111×32', act:'—', detail:'2×2 window, stride 2 — halves spatial dims, keeps max' },
+  { id:'c2',   cls:'lr-conv', label:'Conv', short:'64×3×3', name:'Conv2D — block 2', params:'18496', shape:'109×109×64', act:'—', detail:'64 filters, 3×3 kernel, stride 1, valid padding' },
+  { id:'bn2',  cls:'lr-bn',   label:'BN',    short:'',      name:'BatchNorm — block 2', params:'256', shape:'109×109×64', act:'ReLU', detail:'Stabilizes training, allows higher learning rates' },
+  { id:'r2',   cls:'lr-relu', label:'ReLU',  short:'',      name:'ReLU activation', params:'0', shape:'109×109×64', act:'ReLU', detail:'Introduces non-linearity for complex pattern detection' },
+  { id:'p2',   cls:'lr-pool', label:'Pool',  short:'2×2',   name:'MaxPool2D — block 2', params:'0', shape:'54×54×64', act:'—', detail:'2×2 max pooling — further downsamples spatial resolution' },
+  { id:'c3',   cls:'lr-conv', label:'Conv', short:'128×3×3', name:'Conv2D — block 3', params:'73856', shape:'52×52×128', act:'—', detail:'128 filters, 3×3 kernel — captures high-level features' },
+  { id:'bn3',  cls:'lr-bn',   label:'BN',    short:'',      name:'BatchNorm — block 3', params:'512', shape:'52×52×128', act:'ReLU', detail:'Critical for deep network convergence' },
+  { id:'p3',   cls:'lr-pool', label:'Pool',  short:'2×2',   name:'MaxPool2D — block 3', params:'0', shape:'26×26×128', act:'—', detail:'Output: 26×26×128 feature maps, 86,528 values' },
+  { id:'d1',   cls:'lr-drop', label:'Drop',  short:'0.25',  name:'Dropout (0.25)', params:'0', shape:'26×26×128', act:'—', detail:'Randomly zeroes 25% of feature map values — reduces overfitting' },
+  { id:'fl',   cls:'lr-flat', label:'Flat',  short:'',      name:'Flatten', params:'0', shape:'86528', act:'—', detail:'Reshapes 26×26×128 → 1D vector of 86,528 for dense layers' },
+  { id:'fc1',  cls:'lr-dense',label:'Dense', short:'256',   name:'Dense — FC1', params:'22,151,424', shape:'256', act:'ReLU', detail:'256 units, fully connected; learns global pathology features' },
+  { id:'d2',   cls:'lr-drop', label:'Drop',  short:'0.5',   name:'Dropout (0.5)', params:'0', shape:'256', act:'—', detail:'50% dropout before final classification — strong regularization' },
+  { id:'out',  cls:'lr-out',  label:'Output',short:'2',     name:'Output (Softmax)', params:'514', shape:'2', act:'Softmax', detail:'2 units: P(COVID), P(Normal). Sigmoid also valid for binary.' },
+];
+
+const heights = { 'lr-inp':44,'lr-conv':64,'lr-bn':48,'lr-pool':52,'lr-relu':40,'lr-drop':44,'lr-flat':48,'lr-dense':60,'lr-out':56 };
+
+function arrow() {
+  const sep = document.createElement('div');
+  sep.className = 'layer-sep';
+  sep.innerHTML = `<svg class="arrow-svg" viewBox="0 0 10 10"><path d="M1 5h7M5 2l3 3-3 3" fill="none" stroke="var(--color-border-secondary)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  return sep;
+}
+
+const flow = document.getElementById('layerFlow');
+layers.forEach((l, i) => {
+  if (i > 0) flow.appendChild(arrow());
+  const blk = document.createElement('div');
+  blk.className = 'layer-block';
+  blk.innerHTML = `<div class="layer-rect ${l.cls}" style="height:${heights[l.cls]}px">${l.label}</div><div class="layer-name">${l.short || l.label}</div>`;
+  blk.onclick = () => selectLayer(l);
+  flow.appendChild(blk);
+});
+
+function selectLayer(l) {
+  const p = document.getElementById('selPanel');
+  p.innerHTML = `<div class="sel-name">${l.name}</div><div class="sel-row">
+    <div class="sel-item"><div class="sel-k">params</div><div class="sel-v">${l.params}</div></div>
+    <div class="sel-item"><div class="sel-k">output shape</div><div class="sel-v">${l.shape}</div></div>
+    <div class="sel-item"><div class="sel-k">activation</div><div class="sel-v">${l.act}</div></div>
+    <div class="sel-item" style="flex:1"><div class="sel-k">detail</div><div class="sel-v" style="font-weight:400;color:var(--color-text-secondary);font-size:11px">${l.detail}</div></div>
+  </div>`;
+}
+</script>
